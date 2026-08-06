@@ -8,13 +8,19 @@ export default function CalculateExercises() {
   const [dias, setDias] = useState<number>(0);
   const [diasEntrenados, setDiasEntrenados] = useState<number>(0);
   const [tiempo, setTiempo] = useState<number>(0);
+  const [promedio, setPromedio]=useState<number>(0);
+  const [objetivoAlcanzado, setObjetivoAlcanzado] = useState<boolean>(false);
 
-  function tiempoPromedio(promedio:number) {
+  function tiempoPromedio() {
+    setPromedio(horaEjercisio / 7);
+  }
 
-    set
-
-    
-    
+  function calcularObjetivoAlcanzado(){
+    if (horaEjercisio >= horaObjetivo){
+      setObjetivoAlcanzado(true); 
+    } else {
+      setObjetivoAlcanzado(false);
+    }
   }
 
   return (
@@ -27,14 +33,21 @@ export default function CalculateExercises() {
         value={horaObjetivo.toString()}
         onChangeText={(texto) => setHoraObjetivo(Number(texto))}
       />
-      <Text>Ingrese la cantidad de horas de ejercisio realizadas</Text>
+      <Text>Ingrese la cantidad de horas de ejercisios realizadas en la semana </Text>
       <TextInput
         placeholder="Ingrese la cantidad de horas"
         keyboardType="numeric"
         value={horaEjercisio.toString()}
         onChangeText={(texto) => setHoraEjercisio(Number(texto))}
       />
-      <Button title='Calcular' onPress={tiempoPromedio}></Button>
+      <Button title='Calcular' onPress={()=>{tiempoPromedio(); calcularObjetivoAlcanzado();}}></Button>
+
+      <text>El promedio de horas de ejercisio es: {promedio.toFixed(2)}</text>
+      <text>El objetivo {objetivoAlcanzado ? "fue alcanzado":"no fue Alcanzado"}</text>
+
+      
+
+
 
 
     </View>
