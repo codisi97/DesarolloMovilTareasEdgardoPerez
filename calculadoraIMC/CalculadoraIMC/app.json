@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FormularioTrabajo",
-    "slug": "FormularioTrabajo",
+    "name": "CalculadoraIMC",
+    "slug": "CalculadoraIMC",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

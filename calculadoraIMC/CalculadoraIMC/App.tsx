@@ -1,18 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import UserProfile from './Components/UserProfile';
-import UserHeader from './Components/UserHeader';
+import Formulario from './Components/Formulario';
+import CalculadoraIMC from './Components/CalculadoraIMC';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hola mundo!</Text>
-      <StatusBar style="auto" />
-
-
-      <UserProfile nombre="Juan" edad={30} ciudad="Madrid" ocupacion="Ingeniero"></UserProfile>
-
-
+      <Formulario></Formulario>
     </View>
   );
 }
@@ -25,3 +19,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
