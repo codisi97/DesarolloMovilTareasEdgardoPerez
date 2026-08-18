@@ -1,13 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import ProviderEstudiante from './Providers/ProviderEstudiante';
+import { ScrollView, StyleSheet, Text } from 'react-native'
+import ProviderRecetas from './Providers/ProviderRecetas'
+import Formulario from './Components/ListaRecetas'
+import Lista from './Components/Lista'
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <ProviderEstudiante></ProviderEstudiante>
 
-    </View>
+  return (
+    <ScrollView 
+    style={styles.container}
+    contentContainerStyle={styles.contenido}
+    
+    >
+
+      <Text>Recetas</Text>
+
+      <ProviderRecetas>
+        <Formulario />
+        <Lista />
+      </ProviderRecetas>
+
+    </ScrollView>
   );
 }
 
@@ -15,7 +27,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+
+  contenido: {
     alignItems: 'center',
-    justifyContent: 'center',
+    padding: 20,
   },
 });
