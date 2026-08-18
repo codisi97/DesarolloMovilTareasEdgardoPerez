@@ -20,7 +20,7 @@ export default function ProviderMascota({ children }: ViewReact) {
       nombre:"Alimento",
       valor: 60
     },
-        {
+    {
       nombre:"Energia",
       valor: 60
     },
