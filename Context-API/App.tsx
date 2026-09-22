@@ -1,36 +1,16 @@
-import { ScrollView, StyleSheet, Text } from 'react-native'
-import ProviderRecetas from './Providers/ProviderRecetas'
-import Formulario from './Components/ListaRecetas'
-import Lista from './Components/Lista'
+import React from 'react';
+import ProviderProducto from './Providers/ProviderProducto';
+import AgregarProducto from './pages/AgregarProducto';
 
 export default function App() {
 
   return (
-    <ScrollView 
-    style={styles.container}
-    contentContainerStyle={styles.contenido}
-    
-    >
 
-      <Text>Recetas</Text>
+    <ProviderProducto>
 
-      <ProviderRecetas>
-        <Formulario />
-        <Lista />
-      </ProviderRecetas>
+      <AgregarProducto />
 
-    </ScrollView>
+    </ProviderProducto>
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-
-  contenido: {
-    alignItems: 'center',
-    padding: 20,
-  },
-});

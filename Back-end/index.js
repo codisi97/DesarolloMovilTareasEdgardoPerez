@@ -1,10 +1,12 @@
 const express = require('express');
 const Producto = require('../Back-end/modelos/Producto');
+const cors = require('cors');
 
 const app = express();
 
 
 app.use(express.json());
+app.use(cors());
 
 //ruta de acceso
 //codigo de respuestas -- > 200,401,500, 404, etc

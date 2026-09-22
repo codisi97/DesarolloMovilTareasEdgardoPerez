@@ -1,7 +1,8 @@
-import { View, Text, TextInput, Button } from 'react-native'
+import { View, Text, TextInput, Button, Image, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { useContextProducto } from '../Providers/ProviderProducto';
 import { Producto } from '../Models/Producto';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function AgregarProducto() {
 
@@ -13,6 +14,30 @@ export default function AgregarProducto() {
   const [estado, setEstado] = useState('');
   const [categoria, setCategoria] = useState('');
   const [url_fotografia, setUrlFotografia] = useState('');
+
+
+
+  const tomarFoto = async () => {
+
+    const permiso = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (!permiso.granted) {
+      alert('Se necesita permiso para usar la cámara');
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ['images'],
+      allowsEditing: false,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      console.log(result.assets[0].uri);
+
+      setUrlFotografia(result.assets[0].uri);
+    }
+  }
 
 
   function handleAgregarProducto() {
@@ -40,52 +65,108 @@ export default function AgregarProducto() {
 
 
   return (
-    <View>
+    <View style={styles.container}>
 
-      <Text>Formulario de Agregar Productos</Text>
+        <Text style={styles.titulo}>
+            Agregar Producto
+        </Text>
 
-      <TextInput
-        placeholder="Nombre"
-        value={nombre}
-        onChangeText={setNombre}
-      />
+        <TextInput
+            style={styles.input}
+            placeholder="Nombre"
+            value={nombre}
+            onChangeText={setNombre}
+        />
 
-      <TextInput
-        placeholder="Descripcion"
-        value={descripcion}
-        onChangeText={setDescripcion}
-      />
+        <TextInput
+            style={styles.input}
+            placeholder="Descripcion"
+            value={descripcion}
+            onChangeText={setDescripcion}
+        />
 
-      <TextInput
-        placeholder="Precio"
-        value={precio}
-        onChangeText={setPrecio}
-        keyboardType="numeric"
-      />
+        <TextInput
+            style={styles.input}
+            placeholder="Precio"
+            value={precio}
+            onChangeText={setPrecio}
+            keyboardType="numeric"
+        />
 
-      <TextInput
-        placeholder="Estado"
-        value={estado}
-        onChangeText={setEstado}
-      />
+        <TextInput
+            style={styles.input}
+            placeholder="Estado"
+            value={estado}
+            onChangeText={setEstado}
+        />
 
-      <TextInput
-        placeholder="Categoria"
-        value={categoria}
-        onChangeText={setCategoria}
-      />
+        <TextInput
+            style={styles.input}
+            placeholder="Categoria"
+            value={categoria}
+            onChangeText={setCategoria}
+        />
 
-      <TextInput
-        placeholder="URL Fotografia"
-        value={url_fotografia}
-        onChangeText={setUrlFotografia}
-      />
+        <View style={styles.boton}>
+            <Button
+                title="Tomar Fotografia"
+                onPress={tomarFoto}
+            />
+        </View>
 
-      <Button
-        title="Agregar Producto"
-        onPress={handleAgregarProducto}
-      />
+        {url_fotografia !== '' && (
+            <Image
+                source={{ uri: url_fotografia }}
+                style={styles.imagen}
+            />
+        )}
+
+        <View style={styles.boton}>
+            <Button
+                title="Agregar Producto"
+                onPress={handleAgregarProducto}
+            />
+        </View>
 
     </View>
-  )
-}
+)}
+const styles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 25,
+        backgroundColor: '#fff'
+    },
+
+    titulo: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 25
+    },
+
+    input: {
+        width: '100%',
+        maxWidth: 400,
+        height: 45,
+        borderWidth: 1,
+        borderColor: '#777',
+        borderRadius: 5,
+        paddingHorizontal: 12,
+        marginBottom: 15
+    },
+
+    boton: {
+        width: '100%',
+        maxWidth: 400,
+        marginBottom: 15
+    },
+
+    imagen: {
+        width: 150,
+        height: 150,
+        marginBottom: 15
+    }
+
+})
