@@ -74,13 +74,49 @@ export default function ProviderProducto(children: ViewProps) {
 
     }
   }
+
+  const eliminarProducto = async (id: number) => {
+
+    try {
+
+      const response = await fetch(
+        `https://rb9fst78-3000.use.devtunnels.ms/productos/${id}`,
+        {
+          method: 'DELETE'
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      if (response.ok) {
+
+        Alert.alert('Producto eliminado correctamente');
+
+        setListaProductos(
+          listaProductos.filter(producto => producto.id !== id)
+        );
+
+      }
+
+    } catch (error) {
+
+      Alert.alert(
+        'Error al eliminar el producto',
+        (error as Error).message
+      );
+
+    }
+  }
   return (
     <ContextProducto.Provider
       value={{
         listaProductos,
         setListaProductos,
         agregarProducto,
-        obtenerProductos
+        obtenerProductos,
+        eliminarProducto
       }}
     >
       {children.children}

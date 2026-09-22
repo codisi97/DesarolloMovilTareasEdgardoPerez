@@ -6,6 +6,7 @@ export const ContextProducto = createContext({
   listaProductos: [] as Producto[],
   setListaProductos: (productos: Producto[]) => { },
   agregarProducto: (producto: Producto) => { },
-  obtenerProductos: () => { }
+  obtenerProductos: () => { },
+  eliminarProducto: (id: number) => { }
 
 })

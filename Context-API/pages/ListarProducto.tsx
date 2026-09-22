@@ -6,7 +6,8 @@ export default function ListarProducto() {
 
   const {
     listaProductos,
-    obtenerProductos
+    obtenerProductos,
+    eliminarProducto
   } = useContextProducto();
 
   useEffect(() => {
@@ -45,6 +46,11 @@ export default function ListarProducto() {
               onPress={() => {
                 console.log(item);
               }}
+            />
+
+            <Button
+              title="Eliminar"
+              onPress={() => eliminarProducto(item.id!)}
             />
 
           </View>
